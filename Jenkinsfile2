@@ -1,0 +1,18 @@
+pipeline {
+  agent any 
+    tools {
+      maven 'M2_HOME'
+    }
+  stages {
+    stage ('Git Checkout') {
+      steps {
+        git 'https://github.com/cbabu85/DevOpsAddressBook.git'
+      }
+    stage (' Build Package') {
+      Steps {
+        sh 'mvn clean package'
+      }
+    stage ('Build the Docker Image of my package') {
+      steps {
+        
+    
