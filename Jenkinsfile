@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/devopscbabu/DevOpsAddressBook.git']]])
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/venugopal-aadi/addressbook1.git']]])
             }
         }
         stage('Compile') {
@@ -25,6 +25,10 @@ pipeline {
             steps {
             sh 'mvn clean package'
             }
-        }    
+        } 
+       stage('Deployment') {
+	   steps {
+		sh 'sshpass -p staragile scp target/gamutkart.war staragile@172.31.32.161:/home/staragile/apache-tomcat-9.0.85/webapps/'
+	} 
     }
 }
